@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Games_and_Puzzles-Stategy_and_Target-Dots_and_Lines</title>
+<meta name="description" content="">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="gameCore.css">
+</head>
+<body onLoad="resetSettings();">
+<div id="scoreboard" class="scoreboard player1-active">
+  <div class="col span2of12">&nbsp;</div>
+  <div class="col span8of12">
+    <center>
+      <button type="button" class="btn action" onClick="undo()">Undo Move</button>
+      <button type="button" class="btn action" onClick="resetMap('sameNoWinner');">New Game</button>
+      <button type="button" class="btn action" onClick="turnModalOff('winner'); toggleModal('modal');" id="gameEnd_startGame" >Settings</button>
+    </center>
+  </div>
+  <div class="col span2of12">&nbsp;</div>
+  <div class="player p1" id="redPlayerBox">
+    <h2 id="RedPlayerName" class="name">Red Player</h2>
+    <p id="player1score" class="score">0</p>
+    <div class="character hide" id="redCharacter"></div>
+  </div>
+  <div class="player p2" id="bluePlayerBox">
+    <h2 id="BluePlayerName" class="name"> Blue Player</h2>
+    <p id="player2score" class="score">0<p>
+    <div class="character hide" id="blueCharacter"></div>
+  </div>
+</div>
+<div id="modal" class="modal-container">
+  <div class="modal" id="modalSettings">
+    <header>
+      <img class="gameTitle" src="Dots_And_Lines_Header.jpg" />
+    <!--  <h1>Dots & Lines</h1> -->
+      <img class="logo" src="logo.jpg" alt="in2l Logo" /> </header>
+    <section>
+      <div class="settingsRow bordered">
+        <button type="button" onClick="toggleModal('how-to')" class="btn info center">
+        <p>How to Play</p>
+        </button>
+      </div>
+      <div class="settingsRow">
+        <div class="settingsBlock">
+          <h3>Level Size</h3>
+          <button type="button" onClick="resetMap('beginner', 4)" class="btn settings active" id="beginner">Beginner 4x4</button>
+          <button type="button" onClick="resetMap('intermediate', 5)" class="btn settings" id="intermediate">Intermediate 5x5</button>
+          <button type="button" onClick="resetMap('advanced', 7)" class="btn settings" id="advanced">Advanced 7x7</button>
+          <button type="button" onClick="resetMap('pro', 'random')" class="btn settings" id="pro" style="display:none;">Pro ?x?</button>
+        </div>
+      </div>
+      <div class="settingsRow">
+        <div class="col span6of12">
+          <div class="settingsBlock">
+            <h3>Red Player's Name</h3>
+            <input id="player1-name-input" data-player="Red Player" placeholder="Red Player" />
+          </div>
+        </div>
+        <div class="col span6of12">
+          <div class="settingsBlock">
+            <h3>Blue Player's Name</h3>
+            <input id="player2-name-input" data-player="Blue Player" placeholder="Blue Player" />
+          </div>
+        </div>
+      </div>
+      <div class="settingsRow">
+        <div class="col span6of12">
+          <div class="settingsBlock">
+            <h3>Play against computer?</h3>
+            <button type="button" onClick="resetPlay('play-against');" class="btn settings active" id="play-against">Yes</button>
+            <button type="button" onClick="resetPlay('play-against-no');" class="btn settings" id="play-against-no">No</button>
+          </div>
+        </div>
+        <div class="col span6of12">
+          <div class="settingsBlock">
+            <h3>&nbsp;</h3>
+            <button type="button" id="startGame" class="btn action center" onClick="resetMap('same');">Start Game</button>
+            <!-- toggleModal('modal')  --> 
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div id="winner" class="winner-modal modal hide">
+    <div class="modal-body">
+      <h1><span id="winning-message">Player 1 Wins!</span></h1>
+      <video autoplay loop width="100%" controls>
+        <source src="media/victory.mov" />
+        <source src="media/victory.ogv" type="video/ogg" />
+      </video>
+    </div>
+    <div class="settingsRow moveUpOne">
+      <div class="col span6of12">
+        <div class="settingsBlock">
+          <button type="button" class="btn action center" onClick="resetMap('same');" id="gameEnd_startNewGame">New Game</button>
+        </div>
+      </div>
+      <div class="col span6of12">
+        <div class="settingsBlock">
+          <button type="button" class="btn action center" onClick="toggleModal('winner');" id="gameEnd_startGame" >Settings</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="how-to" class="how-to-modal modal hide">
+    <header class="instructions">
+      <h1>How to Play</h1>
+    </header>
+    <section class="instructions">
+      <div class="col span6of12">
+        <p>Touch between two dots to make horizontal or vertical lines.  When a box is created by a player making the 4<sup>th</sup> line, the player gains that box and his turn continues. </p>
+      </div>
+      <div class="col span6of12">
+        <p>The goal is to create more boxes than your opponent. The player with the most boxes wins.</p>
+        <p>You can follow the score below each player's name.</p>
+      </div>
+      <div class="settingsBlock">
+        <h3>&nbsp;</h3>
+        <button type="button" id="settings" class="btn action center" onClick="toggleModal('how-to');">Settings</button>
+      </div>
+    </section>
+  </div>
+</div>
+<div id="game" class=""></div>
+<script src="scripts.js"></script>
+</body>
+</html>

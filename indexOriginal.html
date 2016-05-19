@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Games_and_Puzzles-Stategy_and_Target-Dots_and_Lines</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<div id="scoreboard" class="scoreboard player1-active">
+		<div class="player p1">
+			<h2 id="RedPlayerName" class="name">Red Player</h2>
+			<span id="player1score" class="score">0</span>
+		</div>
+		<button type="button" class="reset-button score-btn" onclick="toggleModal('modal')">New Game</button>
+		<button type="button" class="undo-button score-btn" onclick="undo()">Undo</button>
+		<div class="player p2">
+			<h2 id="BluePlayerName" class="name"> Blue Player</h2>
+			<span id="player2score" class="score">0</span>
+		</div>
+	</div>
+
+	<div id="modal" class="modal-overlay">
+		<div class="new-game-modal modal">
+			<div class="modal-header">
+				<h1>Dots &amp; Boxes: Setup</h1>
+			</div>
+			<div class="modal-body">
+				<div class="row">
+					<div class="col-2">
+						<h2>Level Size: </h2>
+						<ul>
+							<li><button type="button" onclick="resetMap(4)">Beginner 4x4</button></li>
+							<li><button type="button" onclick="resetMap(5)">Intermediate 5x5</button></li>
+							<li><button type="button" onclick="resetMap(7)">Advanced 7x7</button></li>
+							<li><button type="button" onclick="resetMap('random')">Pro ?x?</button></li>
+						</ul>
+					</div>
+					<div class="col-2">
+						<h2>Play Against Computer?</h2>
+						<div class="onoffswitch">
+							<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="play-against" checked>
+							<label class="onoffswitch-label" for="play-against">
+								<span class="onoffswitch-inner"></span>
+								<!-- <span class="onoffswitch-switch"></span> -->
+							</label>
+						</div>
+						<h2>How to Play: </h2>
+						<button type="button" onclick="toggleModal('how-to')">Show Instructions</button>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-2">
+						<h3>Red Player's Name</h3>
+						<input id="player1-name-input" data-player="Red Player" placeholder="Red Player" />
+					</div>
+					<div class="col-2">
+						<h3>Blue Player's Name</h3>
+						<input id="player2-name-input" data-player="Blue Player" placeholder="Blue Player" />
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" onclick="toggleModal('modal')">To the Game</button>
+			</div>
+		</div>
+
+		<div id="winner" class="winner-modal modal hide">
+			<div class="modal-body">
+				<h1><span id="winning-message">Player 1 Wins!</span></h1>
+				<video autoplay loop width="100%" controls="true">
+					<source src="media/victory.mov" />
+					<source src="media/victory.ogv" type="video/ogg" />
+				</video>
+			</div>
+			<div class="modal-footer">
+				<div class="col-2">
+					<button type="button" onclick="resetMap('same')">Start New Game</button>
+				</div>
+				<div class="col-2">
+					<button type="button" onclick="toggleModal('winner')">Return to Setup</button>
+				</div>
+			</div>
+		</div>
+
+		<div id="how-to" class="how-to-modal modal hide">
+			<div class="modal-header">
+				<h1>How to Play:</h1>
+			</div>
+			<div class="modal-body">
+				<p>The goal is to create more boxes than your opponent by making lines between the dots.  Touch between two dots to make horizontal or vertical lines.  When a box is created by a player making the 4<sup>th</sup> line, the player gains that box and his turn continues.  The player with the most boxes wins.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" onclick="toggleModal('how-to')">Close</button>
+			</div>
+		</div>
+	</div>
+
+	<div id="game" class=""></div>
+	<script src="scripts.js"></script>
+</body>
+</html>
